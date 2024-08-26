@@ -1,24 +1,24 @@
 ﻿using Kamra.Core.Interfaces;
 using Kamra.Core.Models;
-using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kamra.Core.Services;
 
 namespace Kamra.Core.Tests
 {
     [TestClass]
     public class ProductServiceTests
     {
-        private Mock<IProductService> mockProductService;
         private List<Product> testProducts;
+        private ProductService service;
 
         [TestInitialize]
         public void Init()
         {
-            mockProductService = new Mock<IProductService>();
+            service = new ProductService();
             testProducts = new List<Product>()
             {
                 new Product { Id = 1, Name = "Milk", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
@@ -27,14 +27,17 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
-        public void AddProduct_ShouldAddProductSuccessfully()
+        public void AddProduct_ShouldAddProcutSuccessfully()
         {
             var product = testProducts[0];
-            mockProductService.Setup(service => service.AddProduct(product));
+            var productName = product.Name;
 
-            mockProductService.Object.AddProduct(product);
+            service.AddProduct(product);
 
-            mockProductService.Verify(service => service.AddProduct(It.IsAny<Product>()), Times.Once);
+            var resultProduct = service.GetProductByName(productName);
+
+            Assert.AreSame(product, resultProduct);
+
         }
 
 

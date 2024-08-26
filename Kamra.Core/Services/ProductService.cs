@@ -14,12 +14,12 @@ namespace Kamra.Core.Services
 
         public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            products.Add(product);
         }
 
         public Product GetProductByName(string name)
         {
-            throw new NotImplementedException();
+            return products.FirstOrDefault(p => p.Name == name);
         }
 
         public IEnumerable<Product> GetAllProducts()
