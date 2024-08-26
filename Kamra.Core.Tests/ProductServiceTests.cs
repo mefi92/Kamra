@@ -24,6 +24,19 @@ namespace Kamra.Core.Tests
                 new Product { Id = 1, Name = "Milk", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
                 new Product { Id = 2, Name = "Bread", Category = "Food", ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
             };
-        }        
+        }
+
+        [TestMethod]
+        public void AddProduct_ShouldAddProductSuccessfully()
+        {
+            var product = testProducts[0];
+            mockProductService.Setup(service => service.AddProduct(product));
+
+            mockProductService.Object.AddProduct(product);
+
+            mockProductService.Verify(service => service.AddProduct(It.IsAny<Product>()), Times.Once);
+        }
+
+
     }
 }

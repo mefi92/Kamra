@@ -1,5 +1,9 @@
 ﻿namespace Kamra.Core.Models
 {
+    // place? eg: fridge, pentry
+    // felbontás napja => Data of opening , optional
+    // csomagolás típusa, optional
+    // mentett receptek amikben megtalálható 
     public class Product
     {
         public int Id { get; set; }
