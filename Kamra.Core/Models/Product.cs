@@ -1,4 +1,4 @@
-﻿namespace Kamra.Core
+﻿namespace Kamra.Core.Models
 {
     public class Product
     {

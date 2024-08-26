@@ -1,3 +1,5 @@
+using Kamra.Core.Models;
+
 namespace Kamra.Core.Tests
 {
     [TestClass]
