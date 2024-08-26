@@ -30,14 +30,15 @@ namespace Kamra.Core.Tests
         public void AddProduct_ShouldAddProcutSuccessfully()
         {
             var product = testProducts[0];
-            var productName = product.Name;
 
             service.AddProduct(product);
 
-            var resultProduct = service.GetProductByName(productName);
+            var addedProduct = service.GetProductByName("Milk");
 
-            Assert.AreSame(product, resultProduct);
-
+            Assert.IsNotNull(addedProduct);
+            Assert.AreSame(product, addedProduct);
+            Assert.AreEqual(product.Name, addedProduct.Name);
+            Assert.AreEqual(product.Quantity, addedProduct.Quantity);
         }
 
 
