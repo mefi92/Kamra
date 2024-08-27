@@ -117,5 +117,17 @@ namespace Kamra.Core.Tests
             var updatedProduct = productService.GetProductByName("Milk");
             Assert.AreEqual(openingDate, updatedProduct.DateOfOpening);
         }
+
+        [TestMethod]
+        public void AddCategory_ShouldAddCategorySuccessfully()
+        {
+            productService.AddCategory(foodCategory);
+
+            var testProduct = new Product { Name = "Milk", Category = foodCategory };
+            productService.AddProduct(testProduct);
+
+            var addedProduct = productService.GetProductByName("Milk");
+            Assert.AreEqual("Food", addedProduct.Category.Name);
+        }
     }
 }
