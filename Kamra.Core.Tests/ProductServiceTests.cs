@@ -63,5 +63,18 @@ namespace Kamra.Core.Tests
 
             Assert.AreEqual(2, addedProducts.Count());
         }
+
+        [TestMethod]
+        public void AssignStoragePlace_ShouldUpdateProductStoragePlace()
+        {
+            var testProduct = testProducts[0];
+            productService.AddProduct(testProduct);
+            var newStoragePlace = new StoragePlace { Name="Pantry" };
+
+            productService.AssignStoragePlace(testProduct, newStoragePlace);
+
+            var updatedProduct = productService.GetProductByName("Milk");
+            Assert.AreEqual("Pantry", updatedProduct.StoragePlace.Name);
+        }
     }
 }

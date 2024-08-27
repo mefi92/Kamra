@@ -34,10 +34,14 @@ namespace Kamra.Core.Services
 
         public void AssignStoragePlace(Product product, StoragePlace storagePlace)
         {
-            throw new NotImplementedException();
+            var existingProduct = GetProductByName(product.Name);
+            if (existingProduct != null)
+            {
+                existingProduct.StoragePlace = storagePlace;
+            }
         }
 
-        public void AssignStoragePlace(Product product, DateTime dateOfOpening)
+        public void TrackOpeningDate(Product product, DateTime dateOfOpening)
         {
             throw new NotImplementedException();
         }
