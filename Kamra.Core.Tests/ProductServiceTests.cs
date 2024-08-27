@@ -76,5 +76,18 @@ namespace Kamra.Core.Tests
             var updatedProduct = productService.GetProductByName("Milk");
             Assert.AreEqual("Pantry", updatedProduct.StoragePlace.Name);
         }
+
+        [TestMethod]
+        public void TrackOpeningDate_ShouldSetDateOfOpeningCorrectly()
+        {
+            var testProduct = testProducts[0];
+            var openingDate = new DateTime(2024, 8, 27);
+            productService.AddProduct(testProduct);
+
+            productService.TrackOpeningDate(testProduct, openingDate);
+
+            var updatedProduct = productService.GetProductByName("Milk");
+            Assert.AreEqual(openingDate, updatedProduct.DateOfOpening);
+        }
     }
 }

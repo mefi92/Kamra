@@ -43,7 +43,11 @@ namespace Kamra.Core.Services
 
         public void TrackOpeningDate(Product product, DateTime dateOfOpening)
         {
-            throw new NotImplementedException();
+            var existingProduct = GetProductByName(product.Name);
+            if (existingProduct != null)
+            {
+                existingProduct.DateOfOpening = dateOfOpening;
+            }
         }
     }
 }
