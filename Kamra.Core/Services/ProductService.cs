@@ -53,23 +53,45 @@ namespace Kamra.Core.Services
             }
         }
 
+        public void AddCategory(Category category)
+        {
+            CategoryInputValidation(category);
+
+            _categories.Add(category);
+        }
+
+        public IEnumerable<Product> GetProductsByCategory(string categoryName)
+        {
+            GetByCategoryValidation(categoryName);
+
+            return _products.Where(p => p.Category.Name == categoryName);
+        }
+
+        private static void GetByCategoryValidation(string categoryName)
+        {
+            if (string.IsNullOrWhiteSpace(categoryName))
+                throw new ArgumentException(nameof(categoryName), "Category name cannot be empty");
+        }
+
         private static void ProductInputValidation(Product product)
         {
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
 
             if (string.IsNullOrWhiteSpace(product.Name))
-                throw new ArgumentException("Product name cannot be empty", nameof(product));
+                throw new ArgumentException(nameof(product), "Product name cannot be empty");
+
+            if (product.Category == null)
+                throw new ArgumentNullException(nameof(product.Category), "Product category cannot be null");
         }
 
-        public void AddCategory(Category category)
+        private static void CategoryInputValidation(Category category)
         {
-            _categories.Add(category);
-        }
+            if (category == null)
+                throw new ArgumentNullException(nameof(category), "Category cannot be null");
 
-        public IEnumerable<Product> GetProductsByCategory(string categoryName)
-        {
-            return _products.Where(p => p.Category.Name == categoryName);
-        }
+            if (string.IsNullOrWhiteSpace(category.Name))
+                throw new ArgumentException(nameof(category.Name), "Category name cannot be empty");
+        }        
     }
 }

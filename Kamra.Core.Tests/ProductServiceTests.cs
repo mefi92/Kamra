@@ -152,5 +152,28 @@ namespace Kamra.Core.Tests
             Assert.AreEqual(1, drinkProducts.Count());
             Assert.AreEqual("Milk", drinkProducts.First().Name);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddProduct_ProductWithNullCategory_ShouldThrowArgumentNullException()
+        {
+            var product = new Product { Name = "Milk", Category = null };
+            productService.AddProduct(product);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddCategory_NullOrEmptyCategoryName_ShouldThrowArgumentException()
+        {
+            var category = new Category { Id = 1, Name = "" };
+            productService.AddCategory(category);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetProductsByCategory_NullOrEmptyCategoryName_ShouldThrowArgumentException()
+        {
+            productService.GetProductsByCategory("");
+        }
     }
 }
