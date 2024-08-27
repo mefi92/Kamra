@@ -7,6 +7,8 @@ namespace Kamra.Core.Interfaces
         void AddProduct(Product product);
         Product GetProductByName(string name);
         void RemoveProduct(Product product);
+        void AssignStoragePlace(Product product, StoragePlace storagePlace);
+        void TrackOpeningDate(Product product, DateTime dateOfOpening);
         IEnumerable<Product> GetAllProducts();
     }
 }

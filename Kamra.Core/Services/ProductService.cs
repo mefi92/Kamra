@@ -31,5 +31,15 @@ namespace Kamra.Core.Services
         {
             return products;
         }
+
+        public void AssignStoragePlace(Product product, StoragePlace storagePlace)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignStoragePlace(Product product, DateTime dateOfOpening)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
