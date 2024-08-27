@@ -23,7 +23,7 @@ namespace Kamra.Core.Tests
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             testProducts = new List<Product>()
-            {                
+            {
                 new Product { Id = 1, Name = "Milk", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
                 new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
             };
@@ -97,7 +97,7 @@ namespace Kamra.Core.Tests
         {
             var testProduct = testProducts[0];
             productService.AddProduct(testProduct);
-            var newStoragePlace = new StoragePlace { Name="Pantry" };
+            var newStoragePlace = new StoragePlace { Name = "Pantry" };
 
             productService.AssignStoragePlace(testProduct, newStoragePlace);
 
@@ -128,6 +128,29 @@ namespace Kamra.Core.Tests
 
             var addedProduct = productService.GetProductByName("Milk");
             Assert.AreEqual("Food", addedProduct.Category.Name);
+        }
+
+        [TestMethod]
+        public void GetProductsByCategory_ShouldReturnCorrectProducts()
+        {
+            var drinkCategory = new Category { Id = 2, Name = "Drink" };
+
+            productService.AddCategory(foodCategory);
+            productService.AddCategory(drinkCategory);
+
+            var milk = new Product { Name = "Milk", Category = drinkCategory };
+            var bread = new Product { Name = "Bread", Category = foodCategory };
+
+            productService.AddProduct(milk);
+            productService.AddProduct(bread);
+
+            var foodProducts = productService.GetProductsByCategory("Food");
+            Assert.AreEqual(1, foodProducts.Count());
+            Assert.AreEqual("Bread", foodProducts.First().Name);
+
+            var drinkProducts = productService.GetProductsByCategory("Drink");
+            Assert.AreEqual(1, drinkProducts.Count());
+            Assert.AreEqual("Milk", drinkProducts.First().Name);
         }
     }
 }

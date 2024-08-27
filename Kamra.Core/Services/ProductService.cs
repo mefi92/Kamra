@@ -69,7 +69,7 @@ namespace Kamra.Core.Services
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
-            throw new NotImplementedException();
+            return _products.Where(p => p.Category.Name == categoryName);
         }
     }
 }
