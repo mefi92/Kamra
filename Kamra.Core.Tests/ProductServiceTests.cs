@@ -13,12 +13,12 @@ namespace Kamra.Core.Tests
     public class ProductServiceTests
     {
         private List<Product> testProducts;
-        private ProductService service;
+        private ProductService productService;
 
         [TestInitialize]
         public void Init()
         {
-            service = new ProductService();
+            productService = new ProductService();
             testProducts = new List<Product>()
             {
                 new Product { Id = 1, Name = "Milk", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
@@ -29,30 +29,39 @@ namespace Kamra.Core.Tests
         [TestMethod]
         public void AddProduct_ShouldAddProcutSuccessfully()
         {
-            var product = testProducts[0];
+            var testProduct = testProducts[0];
 
-            service.AddProduct(product);
+            productService.AddProduct(testProduct);
 
-            var addedProduct = service.GetProductByName("Milk");
+            var addedProduct = productService.GetProductByName("Milk");
 
             Assert.IsNotNull(addedProduct);
-            Assert.AreSame(product, addedProduct);
-            Assert.AreEqual(product.Name, addedProduct.Name);
-            Assert.AreEqual(product.Quantity, addedProduct.Quantity);
+            Assert.AreSame(testProduct, addedProduct);
+            Assert.AreEqual(testProduct.Name, addedProduct.Name);
+            Assert.AreEqual(testProduct.Quantity, addedProduct.Quantity);
         }
 
         [TestMethod]
         public void RemoveProduct_ShouldRemoveProductSuccessfully()
         {
-            var products = testProducts[0];
-            service.AddProduct(testProducts[0]);
+            var testProduct = testProducts[0];
+            productService.AddProduct(testProducts[0]);
 
-            service.RemoveProduct(products);
-            var addedProduct = service.GetProductByName("Milk");
+            productService.RemoveProduct(testProduct);
+            var addedProduct = productService.GetProductByName("Milk");
 
             Assert.IsNull(addedProduct);
         }
 
+        [TestMethod]
+        public void GetAllProducts_ShouldReturnAllProducts()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
 
+            var addedProducts = productService.GetAllProducts();
+
+            Assert.AreEqual(2, addedProducts.Count());
+        }
     }
 }

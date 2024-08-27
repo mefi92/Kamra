@@ -29,7 +29,7 @@ namespace Kamra.Core.Services
 
         public IEnumerable<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return products;
         }
     }
 }
