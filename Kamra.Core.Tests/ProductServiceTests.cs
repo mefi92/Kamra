@@ -41,6 +41,18 @@ namespace Kamra.Core.Tests
             Assert.AreEqual(product.Quantity, addedProduct.Quantity);
         }
 
+        [TestMethod]
+        public void RemoveProduct_ShouldRemoveProductSuccessfully()
+        {
+            var products = testProducts[0];
+            service.AddProduct(testProducts[0]);
+
+            service.RemoveProduct(products);
+            var addedProduct = service.GetProductByName("Milk");
+
+            Assert.IsNull(addedProduct);
+        }
+
 
     }
 }

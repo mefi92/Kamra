@@ -22,12 +22,12 @@ namespace Kamra.Core.Services
             return products.FirstOrDefault(p => p.Name == name);
         }
 
-        public IEnumerable<Product> GetAllProducts()
-        {
-            throw new NotImplementedException();
-        }        
-
         public void RemoveProduct(Product product)
+        {
+            products.Remove(product);
+        }
+
+        public IEnumerable<Product> GetAllProducts()
         {
             throw new NotImplementedException();
         }
