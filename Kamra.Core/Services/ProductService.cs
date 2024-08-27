@@ -14,7 +14,18 @@ namespace Kamra.Core.Services
 
         public void AddProduct(Product product)
         {
+            ProductInputValidation(product);
+
             products.Add(product);
+        }
+
+        private static void ProductInputValidation(Product product)
+        {
+            if (product == null)
+                throw new ArgumentNullException(nameof(product));
+
+            if (string.IsNullOrWhiteSpace(product.Name))
+                throw new ArgumentException("Product name cannot be empty", nameof(product));
         }
 
         public Product GetProductByName(string name)

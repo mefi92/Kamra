@@ -42,6 +42,31 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddProduct_NullInput_ShouldThrowArgumentNullException()
+        {
+            productService.AddProduct(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProduct_EmptyStringInput_ShouldThrowArgumentException()
+        {
+            var testProduct = new Product { Id = 1, Name = "", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
+
+            productService.AddProduct(testProduct);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProduct_WhiteSpaceStringInput_ShouldThrowArgumentException()
+        {
+            var testProduct = new Product { Id = 1, Name = " ", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
+
+            productService.AddProduct(testProduct);
+        }
+
+        [TestMethod]
         public void RemoveProduct_ShouldRemoveProductSuccessfully()
         {
             var testProduct = testProducts[0];
