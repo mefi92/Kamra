@@ -17,16 +17,7 @@ namespace Kamra.Core.Services
             ProductInputValidation(product);
 
             products.Add(product);
-        }
-
-        private static void ProductInputValidation(Product product)
-        {
-            if (product == null)
-                throw new ArgumentNullException(nameof(product));
-
-            if (string.IsNullOrWhiteSpace(product.Name))
-                throw new ArgumentException("Product name cannot be empty", nameof(product));
-        }
+        }        
 
         public Product GetProductByName(string name)
         {
@@ -59,6 +50,15 @@ namespace Kamra.Core.Services
             {
                 existingProduct.DateOfOpening = dateOfOpening;
             }
+        }
+
+        private static void ProductInputValidation(Product product)
+        {
+            if (product == null)
+                throw new ArgumentNullException(nameof(product));
+
+            if (string.IsNullOrWhiteSpace(product.Name))
+                throw new ArgumentException("Product name cannot be empty", nameof(product));
         }
     }
 }

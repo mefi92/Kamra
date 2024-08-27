@@ -14,15 +14,18 @@ namespace Kamra.Core.Tests
     {
         private List<Product> testProducts;
         private ProductService productService;
+        private Category foodCategory;
 
         [TestInitialize]
         public void Init()
         {
             productService = new ProductService();
+
+            foodCategory = new Category { Id = 1, Name = "Food" };
             testProducts = new List<Product>()
-            {
-                new Product { Id = 1, Name = "Milk", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
-                new Product { Id = 2, Name = "Bread", Category = "Food", ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
+            {                
+                new Product { Id = 1, Name = "Milk", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
+                new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
             };
         }
 
@@ -52,7 +55,7 @@ namespace Kamra.Core.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void AddProduct_EmptyStringInput_ShouldThrowArgumentException()
         {
-            var testProduct = new Product { Id = 1, Name = "", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
+            var testProduct = new Product { Id = 1, Name = "", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
 
             productService.AddProduct(testProduct);
         }
@@ -61,7 +64,7 @@ namespace Kamra.Core.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void AddProduct_WhiteSpaceStringInput_ShouldThrowArgumentException()
         {
-            var testProduct = new Product { Id = 1, Name = " ", Category = "Food", ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
+            var testProduct = new Product { Id = 1, Name = " ", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 };
 
             productService.AddProduct(testProduct);
         }
