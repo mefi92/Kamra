@@ -91,5 +91,18 @@ namespace Kamra.Core.Services
                 existingProduct.Category = category;
             }
         }
+
+        public IEnumerable<Product> SearchProducts(string searchTerm)
+        {
+            ProductValidator.ValidateSearchTerm(searchTerm);
+
+            return _products.Where(p => p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                        p.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

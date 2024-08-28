@@ -122,5 +122,14 @@ namespace Kamra.Core.Properties {
                 return ResourceManager.GetString("ProductNameCannotBeEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search term cannot be empty.
+        /// </summary>
+        internal static string SearchTermCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("SearchTermCannotBeEmpty", resourceCulture);
+            }
+        }
     }
 }

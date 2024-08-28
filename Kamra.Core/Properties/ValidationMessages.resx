@@ -138,4 +138,7 @@
   <data name="ProductNameCannotBeEmpty" xml:space="preserve">
     <value>Product name cannot be empty.</value>
   </data>
+  <data name="SearchTermCannotBeEmpty" xml:space="preserve">
+    <value>Search term cannot be empty</value>
+  </data>
 </root>

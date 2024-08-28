@@ -27,7 +27,9 @@ namespace Kamra.Core.Tests
             testProducts = new List<Product>()
             {
                 new Product { Id = 1, Name = "Milk", Category = drinkCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
-                new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
+                new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 },
+                new Product { Id = 2, Name = "Bread roll", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
+
             };
         }
 
@@ -310,6 +312,31 @@ namespace Kamra.Core.Tests
             var assignedProduct = productService.GetProductByName("Juice");
             Assert.IsNotNull(assignedProduct);
             Assert.AreEqual("Beverages", assignedProduct.Category.Name);
+        }
+
+        [TestMethod]
+        public void SearchProducts_ByName_ShouldReturnMatchingProducts()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+
+            var searchResults = productService.SearchProducts("Milk");
+
+            Assert.AreEqual(1, searchResults.Count());
+            Assert.AreEqual("Milk", searchResults.First().Name);
+        }
+
+        [TestMethod]
+        public void SearchProducts_ByCategory_ShouldReturnMatchingProducts()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+            productService.AddProduct(testProducts[2]);
+
+            var searchResults = productService.SearchProducts("Food");
+
+            Assert.AreEqual(2, searchResults.Count());
+            Assert.IsTrue(searchResults.All(p => p.Category.Name == "Food"));
         }
     }
 }

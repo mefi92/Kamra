@@ -71,6 +71,12 @@ namespace Kamra.Core.Services
                 throw new ArgumentException(ValidationMessages.CategoryCannotBeEmpty, nameof(categoryName));
         }
 
+        public static void ValidateSearchTerm(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                throw new ArgumentException(ValidationMessages.SearchTermCannotBeEmpty, nameof(searchTerm));
+        }
+
         
     }
 }

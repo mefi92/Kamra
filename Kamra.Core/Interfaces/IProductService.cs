@@ -16,5 +16,7 @@ namespace Kamra.Core.Interfaces
         void RemoveCategory(Category category);    
         IEnumerable<Category> GetAllCategories();
         void AssignCategory(Product product, Category category);
+        IEnumerable<Product> SearchProducts(string searchTerm);
+        IEnumerable<Product> FilterProductsByExpirationDate(DateTime date);
     }
 }
