@@ -102,7 +102,7 @@ namespace Kamra.Core.Services
 
         public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
         {
-            throw new NotImplementedException();
+            return _products.Where(p => p.ExpirationDate <= date);
         }
     }
 }

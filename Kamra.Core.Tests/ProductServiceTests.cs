@@ -28,8 +28,7 @@ namespace Kamra.Core.Tests
             {
                 new Product { Id = 1, Name = "Milk", Category = drinkCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
                 new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 },
-                new Product { Id = 2, Name = "Bread roll", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
-
+                new Product { Id = 2, Name = "Bread roll", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(5), Quantity = 10 }
             };
         }
 
@@ -337,6 +336,35 @@ namespace Kamra.Core.Tests
 
             Assert.AreEqual(2, searchResults.Count());
             Assert.IsTrue(searchResults.All(p => p.Category.Name == "Food"));
+        }
+
+        [TestMethod]
+        public void FilterProductsByExpirationDate_ShouldReturnProductsExpiringSoon()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+            productService.AddProduct(testProducts[2]);
+
+            var filterDate = DateTime.Now.AddDays(15);
+
+            var filteredProducts = productService.FilterProductsByExpirationDate(filterDate);
+
+            Assert.AreEqual(2, filteredProducts.Count());
+            Assert.IsTrue(filteredProducts.All(p => p.ExpirationDate <= filterDate));
+        }
+
+        [TestMethod]
+        public void FilterProductsByExpirationDate_ShouldReturnEmptyForFutureDate()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+            productService.AddProduct(testProducts[2]);
+            
+            var filterDate = DateTime.Now.AddDays(-1);
+
+            var filteredProducts = productService.FilterProductsByExpirationDate(filterDate);
+
+            Assert.AreEqual(0, filteredProducts.Count());
         }
     }
 }
