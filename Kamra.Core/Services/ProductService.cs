@@ -80,7 +80,7 @@ namespace Kamra.Core.Services
 
         public void RemoveCategory(Category category)
         {
-            throw new NotImplementedException();
+            _categories.Remove(category);
         }        
     }
 }

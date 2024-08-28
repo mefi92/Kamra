@@ -261,7 +261,9 @@ namespace Kamra.Core.Tests
 
             var addedCategories = productService.GetAllCategories();
 
-            Assert.AreEqual (2, addedCategories.Count());
+            Assert.AreEqual(2, addedCategories.Count());
+            Assert.AreEqual("Food", addedCategories.First().Name);
+            Assert.AreEqual("Drink", addedCategories.Last().Name);
         }
 
         [TestMethod]
@@ -273,6 +275,27 @@ namespace Kamra.Core.Tests
 
             var addedCategories = productService.GetAllCategories();
             (addedCategories as IList<Category>).Add(new Category());
+        }
+
+        [TestMethod]
+        public void RemoveCategory_ShouldRemoveCategorySuccessfully()
+        {
+            productService.AddCategory(foodCategory);
+            productService.AddCategory(drinkCategory);
+
+            var addedCategories = productService.GetAllCategories();
+            var addedFood = addedCategories.First();
+            var addedDrink = addedCategories.Last();
+
+            productService.RemoveCategory(addedFood);
+            Assert.AreEqual(1, addedCategories.Count());
+
+            addedCategories = productService.GetAllCategories();
+            Assert.AreEqual("Drink", addedCategories.First().Name);
+
+            productService.RemoveCategory(drinkCategory);
+            addedCategories = productService.GetAllCategories();
+            Assert.AreEqual(0, addedCategories.Count());
         }
     }
 }
