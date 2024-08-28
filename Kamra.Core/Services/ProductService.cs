@@ -81,6 +81,15 @@ namespace Kamra.Core.Services
         public void RemoveCategory(Category category)
         {
             _categories.Remove(category);
-        }        
+        }
+
+        public void AssignCategory(Product product, Category category)
+        {
+            var existingProduct = GetProductByName(product.Name);
+            if (existingProduct != null)
+            {
+                existingProduct.Category = category;
+            }
+        }
     }
 }

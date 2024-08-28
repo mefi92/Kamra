@@ -15,5 +15,6 @@ namespace Kamra.Core.Interfaces
         void AddCategory(Category category);
         void RemoveCategory(Category category);    
         IEnumerable<Category> GetAllCategories();
+        void AssignCategory(Product product, Category category);
     }
 }

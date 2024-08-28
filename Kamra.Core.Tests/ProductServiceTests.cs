@@ -297,5 +297,19 @@ namespace Kamra.Core.Tests
             addedCategories = productService.GetAllCategories();
             Assert.AreEqual(0, addedCategories.Count());
         }
+
+        [TestMethod]
+        public void AssignCategory_ShouldAssignProductToCategorySuccessfully()
+        {
+            var product = new Product { Id = 4, Name = "Juice", Category = new Category { Name = "Beverages" }, ExpirationDate = DateTime.Now.AddDays(15), Quantity = 7 };
+            var newCategory = new Category { Name = "Beverages" };
+            productService.AddProduct(product);
+
+            productService.AssignCategory(product, newCategory);
+
+            var assignedProduct = productService.GetProductByName("Juice");
+            Assert.IsNotNull(assignedProduct);
+            Assert.AreEqual("Beverages", assignedProduct.Category.Name);
+        }
     }
 }
