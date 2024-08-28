@@ -92,6 +92,11 @@ namespace Kamra.Core.Services
 
             if (string.IsNullOrWhiteSpace(category.Name))
                 throw new ArgumentException(nameof(category.Name), "Category name cannot be empty");
-        }        
+        }
+
+        public Product GetProductByBarcode(string barcode)
+        {
+            return _products.FirstOrDefault(p => p.Barcode == barcode);
+        }
     }
 }

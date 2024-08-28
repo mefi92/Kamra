@@ -175,5 +175,17 @@ namespace Kamra.Core.Tests
         {
             productService.GetProductsByCategory("");
         }
+
+        [TestMethod]
+        public void GetProductByBarcode_ShouldReturnCorrectProduct()
+        {
+            var testProduct = new Product { Name = "Bread", Category = foodCategory, Barcode = "12345" };
+            productService.AddProduct(testProduct);
+
+            var addedProduct = productService.GetProductByBarcode("12345");
+
+            Assert.IsNotNull(addedProduct);
+            Assert.AreEqual("Bread", addedProduct.Name);
+        }
     }
 }
