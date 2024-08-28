@@ -1,4 +1,5 @@
 ﻿using Kamra.Core.Models;
+using Kamra.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,41 +29,41 @@ namespace Kamra.Core.Services
             if (!string.IsNullOrWhiteSpace(barcode))
             {
                 if (existingProducts.Any(p => p.Barcode == barcode))
-                    throw new ArgumentException("Product with this barcode already exists", nameof(barcode));
+                    throw new ArgumentException(ValidationMessages.BarcodeAlreadyExists, nameof(barcode));
             }
         }
 
         private static void ValidateProductName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Product name cannot be empty", nameof(name));
+                throw new ArgumentException(ValidationMessages.ProductNameCannotBeEmpty, nameof(name));
         }
 
         private static void ValidateProductCategory(Category category)
         {
             if (category == null)
-                throw new ArgumentNullException("Product category cannot be null", nameof(category));
+                throw new ArgumentNullException(ValidationMessages.ProductCannotBeNull, nameof(category));
         }
 
         public static void ValidateCategoryInput(Category category)
         {
             if (category == null)
-                throw new ArgumentNullException("Category cannot be null", nameof(category));
+                throw new ArgumentNullException(ValidationMessages.CategoryCannotBeNull, nameof(category));
 
             if (string.IsNullOrWhiteSpace(category.Name))
-                throw new ArgumentException("Category name cannot be empty", nameof(category.Name));
+                throw new ArgumentException(ValidationMessages.CategoryCannotBeEmpty, nameof(category.Name));
         }
 
         public static void ValidateCategoryName(string categoryName)
         {
             if (string.IsNullOrWhiteSpace(categoryName))
-                throw new ArgumentException("Category name cannot be empty", nameof(categoryName));
+                throw new ArgumentException(ValidationMessages.CategoryCannotBeEmpty, nameof(categoryName));
         }
 
         public static void ValidateBarcode(string barcode)
         {
             if (string.IsNullOrWhiteSpace(barcode))
-                throw new ArgumentException("Barcode cannot be empty", nameof(barcode));
+                throw new ArgumentException(ValidationMessages.BarcodeCannotBeEmpty, nameof(barcode));
         }
     }
 }
