@@ -15,7 +15,7 @@ namespace Kamra.Core.Services
 
         public void AddProduct(Product product)
         {
-            ProductValidator.ValidateProduct(product, _products);
+            ProductValidator.ValidateProductInput(product, _products);
 
             _products.Add(product);
         }        
@@ -32,7 +32,7 @@ namespace Kamra.Core.Services
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _products;
+            return _products.AsReadOnly();
         }
 
         public void AssignStoragePlace(Product product, StoragePlace storagePlace)
@@ -55,7 +55,7 @@ namespace Kamra.Core.Services
 
         public void AddCategory(Category category)
         {
-            ProductValidator.ValidateCategory(category);
+            ProductValidator.ValidateCategoryInput(category);
 
             _categories.Add(category);
         }
@@ -64,7 +64,7 @@ namespace Kamra.Core.Services
         {
             ProductValidator.ValidateCategoryName(categoryName);
 
-            return _products.Where(p => p.Category.Name == categoryName);
+            return _products.Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
         }
 
         public Product GetProductByBarcode(string barcode)

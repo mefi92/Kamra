@@ -9,7 +9,7 @@ namespace Kamra.Core.Services
 {
     public static class ProductValidator
     {
-        public static void ValidateProduct(Product product, List<Product> products)
+        public static void ValidateProductInput(Product product, List<Product> products)
         {
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
@@ -27,7 +27,7 @@ namespace Kamra.Core.Services
             }
         }
 
-        public static void ValidateCategory(Category category)
+        public static void ValidateCategoryInput(Category category)
         {
             if (category == null)
                 throw new ArgumentNullException("Category cannot be null", nameof(category));

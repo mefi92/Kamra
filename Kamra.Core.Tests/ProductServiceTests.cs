@@ -217,5 +217,27 @@ namespace Kamra.Core.Tests
         {
             productService.GetProductByBarcode("");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetAllProducts_ShouldReturnImmutableCollection()
+        {            
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+
+            var products = productService.GetAllProducts();
+            (products as IList<Product>).Add(new Product());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetProductsByCategory_ShouldReturnImmutableCollection()
+        {
+            productService.AddProduct(testProducts[0]);
+            productService.AddProduct(testProducts[1]);
+
+            var productsByCategory = productService.GetProductsByCategory("Food");
+            (productsByCategory as IList<Product>).Add(new Product());
+        }
     }
 }
