@@ -187,5 +187,35 @@ namespace Kamra.Core.Tests
             Assert.IsNotNull(addedProduct);
             Assert.AreEqual("Bread", addedProduct.Name);
         }
+
+        [TestMethod]
+        public void AddProduct_WithDuplicateBarcode_ShouldThrowArgumentException()
+        {
+            var product1 = new Product { Name = "Banana", Category = foodCategory, Barcode = "12345" };
+            var product2 = new Product { Name = "Bread", Category = foodCategory, Barcode = "12345" };
+
+            productService.AddProduct(product1);
+
+            Assert.ThrowsException<ArgumentException>(() => productService.AddProduct(product2));
+        }
+
+        [TestMethod]
+        public void AddProduct_WithoutBarcode_ShouldAddProductSuccessfully()
+        {
+            var product = new Product { Name = "Milk", Category = foodCategory, Barcode = null };
+
+            productService.AddProduct(product);
+
+            var addedProduct = productService.GetProductByName("Milk");
+            Assert.IsNotNull(addedProduct);
+            Assert.IsNull(addedProduct.Barcode);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetProductByBarcode_EmptyBarcode_ShouldThrowArgumentException()
+        {
+            productService.GetProductByBarcode("");
+        }
     }
 }

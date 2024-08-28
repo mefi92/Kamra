@@ -15,7 +15,7 @@ namespace Kamra.Core.Services
 
         public void AddProduct(Product product)
         {
-            ProductInputValidation(product);
+            ProductValidator.ValidateProduct(product, _products);
 
             _products.Add(product);
         }        
@@ -55,48 +55,23 @@ namespace Kamra.Core.Services
 
         public void AddCategory(Category category)
         {
-            CategoryInputValidation(category);
+            ProductValidator.ValidateCategory(category);
 
             _categories.Add(category);
         }
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
-            GetByCategoryValidation(categoryName);
+            ProductValidator.ValidateCategoryName(categoryName);
 
             return _products.Where(p => p.Category.Name == categoryName);
         }
 
-        private static void GetByCategoryValidation(string categoryName)
-        {
-            if (string.IsNullOrWhiteSpace(categoryName))
-                throw new ArgumentException(nameof(categoryName), "Category name cannot be empty");
-        }
-
-        private static void ProductInputValidation(Product product)
-        {
-            if (product == null)
-                throw new ArgumentNullException(nameof(product));
-
-            if (string.IsNullOrWhiteSpace(product.Name))
-                throw new ArgumentException(nameof(product), "Product name cannot be empty");
-
-            if (product.Category == null)
-                throw new ArgumentNullException(nameof(product.Category), "Product category cannot be null");
-        }
-
-        private static void CategoryInputValidation(Category category)
-        {
-            if (category == null)
-                throw new ArgumentNullException(nameof(category), "Category cannot be null");
-
-            if (string.IsNullOrWhiteSpace(category.Name))
-                throw new ArgumentException(nameof(category.Name), "Category name cannot be empty");
-        }
-
         public Product GetProductByBarcode(string barcode)
         {
+            ProductValidator.ValidateBarcode(barcode);
+
             return _products.FirstOrDefault(p => p.Barcode == barcode);
-        }
+        }        
     }
 }
