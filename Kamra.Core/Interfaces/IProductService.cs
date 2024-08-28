@@ -13,6 +13,7 @@ namespace Kamra.Core.Interfaces
         void TrackOpeningDate(Product product, DateTime dateOfOpening);        
         IEnumerable<Product> GetAllProducts();
         void AddCategory(Category category);
-        
+        void RemoveCategory(Category category);    
+        IEnumerable<Category> GetAllCategories();
     }
 }

@@ -15,6 +15,7 @@ namespace Kamra.Core.Tests
         private List<Product> testProducts;
         private ProductService productService;
         private Category foodCategory;
+        private Category drinkCategory;
 
         [TestInitialize]
         public void Init()
@@ -22,9 +23,10 @@ namespace Kamra.Core.Tests
             productService = new ProductService();
 
             foodCategory = new Category { Id = 1, Name = "Food" };
+            drinkCategory = new Category { Id = 1, Name = "Drink" };
             testProducts = new List<Product>()
             {
-                new Product { Id = 1, Name = "Milk", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
+                new Product { Id = 1, Name = "Milk", Category = drinkCategory, ExpirationDate = DateTime.Now.AddDays(10), Quantity = 5 },
                 new Product { Id = 2, Name = "Bread", Category = foodCategory, ExpirationDate = DateTime.Now.AddDays(20), Quantity = 10 }
             };
         }
@@ -249,6 +251,28 @@ namespace Kamra.Core.Tests
 
             productService.AddCategory(foodCategory1);
             productService.AddCategory(foodCategory2);
+        }
+
+        [TestMethod]
+        public void GetAllCategories_ShouldReturnAllCategories()
+        {
+            productService.AddCategory(foodCategory);
+            productService.AddCategory(drinkCategory);
+
+            var addedCategories = productService.GetAllCategories();
+
+            Assert.AreEqual (2, addedCategories.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetAllCategories_ShouldReturnImmutableCollection()
+        {
+            productService.AddCategory(foodCategory);
+            productService.AddCategory(drinkCategory);
+
+            var addedCategories = productService.GetAllCategories();
+            (addedCategories as IList<Category>).Add(new Category());
         }
     }
 }

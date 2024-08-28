@@ -71,6 +71,16 @@ namespace Kamra.Core.Services
             ProductValidator.ValidateBarcode(barcode);
 
             return _products.FirstOrDefault(p => p.Barcode == barcode);
+        }
+
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return _categories.AsReadOnly();
+        }
+
+        public void RemoveCategory(Category category)
+        {
+            throw new NotImplementedException();
         }        
     }
 }
