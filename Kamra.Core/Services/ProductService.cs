@@ -57,7 +57,14 @@ namespace Kamra.Core.Services
         {
             ProductValidator.ValidateCategoryInput(category);
 
-            _categories.Add(category);
+            if (!_categories.Any(c => c.Name == category.Name))
+            {
+                _categories.Add(category);
+            }
+            else
+            {
+                throw new ArgumentException("Category already exists", nameof(category));
+            }
         }
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)

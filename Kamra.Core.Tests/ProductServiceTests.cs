@@ -239,5 +239,16 @@ namespace Kamra.Core.Tests
             var productsByCategory = productService.GetProductsByCategory("Food");
             (productsByCategory as IList<Product>).Add(new Product());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddCategory_CategoryDuplication_ShouldThrowArgumentException()
+        {
+            Category foodCategory1 = new Category { Id = 1, Name = "Food" };
+            Category foodCategory2 = new Category { Id = 2, Name = "Food" };
+
+            productService.AddCategory(foodCategory1);
+            productService.AddCategory(foodCategory2);
+        }
     }
 }
