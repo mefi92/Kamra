@@ -45,13 +45,24 @@ namespace Kamra.Core.Services
                 throw new ArgumentNullException(ValidationMessages.ProductCannotBeNull, nameof(category));
         }
 
-        public static void ValidateCategoryInput(Category category)
+        public static void ValidateBarcode(string barcode)
+        {
+            if (string.IsNullOrWhiteSpace(barcode))
+                throw new ArgumentException(ValidationMessages.BarcodeCannotBeEmpty, nameof(barcode));
+        }
+
+        public static void ValidateCategoryInput(Category category, List<Category> categories)
         {
             if (category == null)
                 throw new ArgumentNullException(ValidationMessages.CategoryCannotBeNull, nameof(category));
 
             if (string.IsNullOrWhiteSpace(category.Name))
                 throw new ArgumentException(ValidationMessages.CategoryCannotBeEmpty, nameof(category.Name));
+
+            if (categories.Any(c => c.Name == category.Name))
+            {
+                throw new ArgumentException(ValidationMessages.CategoryAlreadyExists, nameof(category));
+            }
         }
 
         public static void ValidateCategoryName(string categoryName)
@@ -60,10 +71,6 @@ namespace Kamra.Core.Services
                 throw new ArgumentException(ValidationMessages.CategoryCannotBeEmpty, nameof(categoryName));
         }
 
-        public static void ValidateBarcode(string barcode)
-        {
-            if (string.IsNullOrWhiteSpace(barcode))
-                throw new ArgumentException(ValidationMessages.BarcodeCannotBeEmpty, nameof(barcode));
-        }
+        
     }
 }

@@ -123,6 +123,9 @@
   <data name="BarcodeCannotBeEmpty" xml:space="preserve">
     <value>Barcode cannot be empty.</value>
   </data>
+  <data name="CategoryAlreadyExists" xml:space="preserve">
+    <value>Category already exists.</value>
+  </data>
   <data name="CategoryCannotBeEmpty" xml:space="preserve">
     <value>Category name cannot be empty.</value>
   </data>

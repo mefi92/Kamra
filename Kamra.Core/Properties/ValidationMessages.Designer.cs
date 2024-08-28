@@ -79,6 +79,15 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category already exists..
+        /// </summary>
+        internal static string CategoryAlreadyExists {
+            get {
+                return ResourceManager.GetString("CategoryAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category name cannot be empty..
         /// </summary>
         internal static string CategoryCannotBeEmpty {
