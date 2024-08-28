@@ -9,22 +9,39 @@ namespace Kamra.Core.Services
 {
     public static class ProductValidator
     {
-        public static void ValidateProductInput(Product product, List<Product> products)
+        public static void ValidateProductInput(Product product, List<Product> existingProducts)
+        {
+            ValidateIsProductNull(product);
+            ValidateProductName(product.Name);
+            ValidateProductCategory(product.Category);
+            ValidateProductBarcode(product.Barcode, existingProducts);
+        }
+
+        private static void ValidateIsProductNull(Product product)
         {
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
+        }
 
-            if (string.IsNullOrWhiteSpace(product.Name))
-                throw new ArgumentException("Product name cannot be empty", nameof(product));
-
-            if (product.Category == null)
-                throw new ArgumentNullException("Product category cannot be null", nameof(product.Category));
-
-            if (!string.IsNullOrWhiteSpace(product.Barcode))
+        private static void ValidateProductBarcode(string barcode, List<Product> existingProducts)
+        {
+            if (!string.IsNullOrWhiteSpace(barcode))
             {
-                if (products.Any(p => p.Barcode == product.Barcode))
-                    throw new ArgumentException("Product with this barcode already exists", nameof(product.Barcode));
+                if (existingProducts.Any(p => p.Barcode == barcode))
+                    throw new ArgumentException("Product with this barcode already exists", nameof(barcode));
             }
+        }
+
+        private static void ValidateProductName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Product name cannot be empty", nameof(name));
+        }
+
+        private static void ValidateProductCategory(Category category)
+        {
+            if (category == null)
+                throw new ArgumentNullException("Product category cannot be null", nameof(category));
         }
 
         public static void ValidateCategoryInput(Category category)
