@@ -6,14 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kamra.Core.Services;
+using Moq;
 
 namespace Kamra.Core.Tests
 {
     [TestClass]
     public class ProductServiceTests
     {
+        private ICategoryService categoryService;
+        private IProductService productService;
+
         private List<Product> testProducts;
-        private ProductService productService;
+        
         private Category foodCategory;
         private Category drinkCategory;
 
@@ -21,6 +25,7 @@ namespace Kamra.Core.Tests
         public void Init()
         {
             productService = new ProductService();
+            categoryService = new CategoryService();
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             drinkCategory = new Category { Id = 1, Name = "Drink" };
@@ -122,24 +127,14 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
-        public void AddCategory_ShouldAddCategorySuccessfully()
-        {
-            productService.AddCategory(foodCategory);
-
-            var testProduct = new Product { Name = "Milk", Category = foodCategory };
-            productService.AddProduct(testProduct);
-
-            var addedProduct = productService.GetProductByName("Milk");
-            Assert.AreEqual("Food", addedProduct.Category.Name);
-        }
-
-        [TestMethod]
         public void GetProductsByCategory_ShouldReturnCorrectProducts()
         {
+            var mockCategoryService = new Mock<ICategoryService>();
             var drinkCategory = new Category { Id = 2, Name = "Drink" };
+            var foodCategory = new Category { Id = 1, Name = "Food" };
 
-            productService.AddCategory(foodCategory);
-            productService.AddCategory(drinkCategory);
+            mockCategoryService.Setup(c => c.GetCategoryByName("Food")).Returns(foodCategory);
+            mockCategoryService.Setup(c => c.GetCategoryByName("Drink")).Returns(drinkCategory);
 
             var milk = new Product { Name = "Milk", Category = drinkCategory };
             var bread = new Product { Name = "Bread", Category = foodCategory };
@@ -162,14 +157,6 @@ namespace Kamra.Core.Tests
         {
             var product = new Product { Name = "Milk", Category = null };
             productService.AddProduct(product);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddCategory_NullOrEmptyCategoryName_ShouldThrowArgumentException()
-        {
-            var category = new Category { Id = 1, Name = "" };
-            productService.AddCategory(category);
         }
 
         [TestMethod]
@@ -244,65 +231,9 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddCategory_CategoryDuplication_ShouldThrowArgumentException()
-        {
-            Category foodCategory1 = new Category { Id = 1, Name = "Food" };
-            Category foodCategory2 = new Category { Id = 2, Name = "Food" };
-
-            productService.AddCategory(foodCategory1);
-            productService.AddCategory(foodCategory2);
-        }
-
-        [TestMethod]
-        public void GetAllCategories_ShouldReturnAllCategories()
-        {
-            productService.AddCategory(foodCategory);
-            productService.AddCategory(drinkCategory);
-
-            var addedCategories = productService.GetAllCategories();
-
-            Assert.AreEqual(2, addedCategories.Count());
-            Assert.AreEqual("Food", addedCategories.First().Name);
-            Assert.AreEqual("Drink", addedCategories.Last().Name);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
-        public void GetAllCategories_ShouldReturnImmutableCollection()
-        {
-            productService.AddCategory(foodCategory);
-            productService.AddCategory(drinkCategory);
-
-            var addedCategories = productService.GetAllCategories();
-            (addedCategories as IList<Category>).Add(new Category());
-        }
-
-        [TestMethod]
-        public void RemoveCategory_ShouldRemoveCategorySuccessfully()
-        {
-            productService.AddCategory(foodCategory);
-            productService.AddCategory(drinkCategory);
-
-            var addedCategories = productService.GetAllCategories();
-            var addedFood = addedCategories.First();
-            var addedDrink = addedCategories.Last();
-
-            productService.RemoveCategory(addedFood);
-            Assert.AreEqual(1, addedCategories.Count());
-
-            addedCategories = productService.GetAllCategories();
-            Assert.AreEqual("Drink", addedCategories.First().Name);
-
-            productService.RemoveCategory(drinkCategory);
-            addedCategories = productService.GetAllCategories();
-            Assert.AreEqual(0, addedCategories.Count());
-        }
-
-        [TestMethod]
         public void AssignCategory_ShouldAssignProductToCategorySuccessfully()
         {
-            var product = new Product { Id = 4, Name = "Juice", Category = new Category { Name = "Beverages" }, ExpirationDate = DateTime.Now.AddDays(15), Quantity = 7 };
+            var product = new Product { Id = 4, Name = "Juice", Category = new Category { Name = "NA" }, ExpirationDate = DateTime.Now.AddDays(15), Quantity = 7 };
             var newCategory = new Category { Name = "Beverages" };
             productService.AddProduct(product);
 
@@ -365,6 +296,6 @@ namespace Kamra.Core.Tests
             var filteredProducts = productService.FilterProductsByExpirationDate(filterDate);
 
             Assert.AreEqual(0, filteredProducts.Count());
-        }
+        }        
     }
 }

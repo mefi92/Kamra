@@ -5,18 +5,15 @@ namespace Kamra.Core.Interfaces
     public interface IProductService
     {
         void AddProduct(Product product);
-        Product GetProductByName(string name);
-        Product GetProductByBarcode(string barcode);
-        IEnumerable<Product> GetProductsByCategory(string categoryName);
         void RemoveProduct(Product product);
-        void AssignStoragePlace(Product product, StoragePlace storagePlace);
-        void TrackOpeningDate(Product product, DateTime dateOfOpening);        
+        Product GetProductByName(string name);
         IEnumerable<Product> GetAllProducts();
-        void AddCategory(Category category);
-        void RemoveCategory(Category category);    
-        IEnumerable<Category> GetAllCategories();
-        void AssignCategory(Product product, Category category);
+        IEnumerable<Product> GetProductsByCategory(string categoryName);
+        void AssignStoragePlace(Product product, StoragePlace storagePlace);
+        void TrackOpeningDate(Product product, DateTime dateOfOpening);
+        Product GetProductByBarcode(string barcode);
         IEnumerable<Product> SearchProducts(string searchTerm);
         IEnumerable<Product> FilterProductsByExpirationDate(DateTime date);
+        void AssignCategory(Product product, Category category);
     }
 }

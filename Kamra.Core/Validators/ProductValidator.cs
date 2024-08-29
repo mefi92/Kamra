@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kamra.Core.Services
+namespace Kamra.Core.Validators
 {
     public static class ProductValidator
     {
@@ -77,6 +77,6 @@ namespace Kamra.Core.Services
                 throw new ArgumentException(ValidationMessages.SearchTermCannotBeEmpty, nameof(searchTerm));
         }
 
-        
+
     }
 }

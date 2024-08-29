@@ -1,5 +1,6 @@
 ﻿using Kamra.Core.Interfaces;
 using Kamra.Core.Models;
+using Kamra.Core.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,7 @@ using System.Threading.Tasks;
 namespace Kamra.Core.Services
 {
     public class ProductService : IProductService
-    {
-        private List<Category> _categories = new List<Category>();
+    {        
         private List<Product> _products = new List<Product>();
 
         public void AddProduct(Product product)
@@ -51,13 +51,7 @@ namespace Kamra.Core.Services
             {
                 existingProduct.DateOfOpening = dateOfOpening;
             }
-        }
-
-        public void AddCategory(Category category)
-        {
-            ProductValidator.ValidateCategoryInput(category, _categories);
-            _categories.Add(category);
-        }
+        }        
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
@@ -71,16 +65,6 @@ namespace Kamra.Core.Services
             ProductValidator.ValidateBarcode(barcode);
 
             return _products.FirstOrDefault(p => p.Barcode == barcode);
-        }
-
-        public IEnumerable<Category> GetAllCategories()
-        {
-            return _categories.AsReadOnly();
-        }
-
-        public void RemoveCategory(Category category)
-        {
-            _categories.Remove(category);
         }
 
         public void AssignCategory(Product product, Category category)
