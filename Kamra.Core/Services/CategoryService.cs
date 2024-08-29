@@ -26,7 +26,7 @@ namespace Kamra.Core.Services
 
         public Category GetCategoryByName(string categoryName)
         {
-            throw new NotImplementedException();
+            return _categories.FirstOrDefault(p => p.Name == categoryName);
         }
 
         public void RemoveCategory(Category category)

@@ -94,5 +94,15 @@ namespace Kamra.Core.Tests
             categories = categoryService.GetAllCategories();
             Assert.AreEqual(0, categories.Count());
         }
+
+        [TestMethod]
+        public void GetCategoryByName_ShouldReturnCategorySuccessfully()
+        {
+            categoryService.AddCategory(foodCategory);
+
+            var addedCategory = categoryService.GetCategoryByName("Food");
+
+            Assert.AreEqual(foodCategory, addedCategory);
+        }
     }
 }
