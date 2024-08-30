@@ -304,6 +304,12 @@ namespace Kamra.Core.Tests
             var filteredProducts = productService.FilterProductsByExpirationDate(filterDate);
 
             Assert.AreEqual(0, filteredProducts.Count());
-        }        
+        }
+
+        [TestMethod]
+        public void CI_CD_GitTest()
+        {
+            Assert.Fail();
+        }
     }
 }
