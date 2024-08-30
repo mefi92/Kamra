@@ -106,7 +106,7 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Category not exists..
+        ///   Looks up a localized string similar to Category does not exists..
         /// </summary>
         internal static string CategoryNotExists {
             get {
@@ -133,7 +133,7 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product not exists..
+        ///   Looks up a localized string similar to Product does not exists..
         /// </summary>
         internal static string ProductNotExists {
             get {
