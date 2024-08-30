@@ -55,7 +55,7 @@ namespace Kamra.Core.Services
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
-            ProductValidator.ValidateCategoryName(categoryName);
+            CategoryValidator.ValidateCategoryName(categoryName);
 
             return _products.Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
         }

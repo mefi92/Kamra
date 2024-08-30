@@ -106,6 +106,15 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category not exists..
+        /// </summary>
+        internal static string CategoryNotExists {
+            get {
+                return ResourceManager.GetString("CategoryNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product cannot be null..
         /// </summary>
         internal static string ProductCannotBeNull {

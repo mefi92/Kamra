@@ -1,6 +1,7 @@
 ﻿using Kamra.Core.Interfaces;
 using Kamra.Core.Models;
 using Kamra.Core.Services;
+using Kamra.Core.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Kamra.Core.Tests
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             drinkCategory = new Category { Id = 2, Name = "Drink" };
-        }
+        }        
 
         [TestMethod]
         public void AddCategory_ShouldAddCategorySuccessfully()
@@ -36,6 +37,13 @@ namespace Kamra.Core.Tests
             Assert.IsNotNull(categories);
             Assert.AreEqual(1, categories.Count());
             Assert.AreEqual("Food", categories.First().Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddCategory_NullInput_ShouldThrowArgumentNullException()
+        {
+            categoryService.AddCategory(null);
         }
 
         [TestMethod]
@@ -103,6 +111,13 @@ namespace Kamra.Core.Tests
             var addedCategory = categoryService.GetCategoryByName("Food");
 
             Assert.AreEqual(foodCategory, addedCategory);
+        }
+
+        [TestMethod]
+        [ExpectedException (typeof(InvalidOperationException))]
+        public void RemoveCategory_NotExists_ShouldThrowInvalidOperationException()
+        {            
+            categoryService.RemoveCategory(foodCategory);
         }
     }
 }

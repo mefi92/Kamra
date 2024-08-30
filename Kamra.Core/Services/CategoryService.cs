@@ -15,7 +15,7 @@ namespace Kamra.Core.Services
 
         public void AddCategory(Category category)
         {
-            ProductValidator.ValidateCategoryInput(category, _categories);
+            CategoryValidator.ValidateCategoryInput(category, _categories);
             _categories.Add(category);
         }
 
@@ -31,6 +31,7 @@ namespace Kamra.Core.Services
 
         public void RemoveCategory(Category category)
         {
+            CategoryValidator.ValidateCategoryExists(category, _categories);
             _categories.Remove(category);
         }
     }

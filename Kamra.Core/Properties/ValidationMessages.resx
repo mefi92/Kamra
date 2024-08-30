@@ -132,6 +132,9 @@
   <data name="CategoryCannotBeNull" xml:space="preserve">
     <value>Product category cannot be null.</value>
   </data>
+  <data name="CategoryNotExists" xml:space="preserve">
+    <value>Category not exists.</value>
+  </data>
   <data name="ProductCannotBeNull" xml:space="preserve">
     <value>Product cannot be null.</value>
   </data>
