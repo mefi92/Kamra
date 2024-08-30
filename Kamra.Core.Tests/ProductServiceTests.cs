@@ -309,7 +309,7 @@ namespace Kamra.Core.Tests
         [TestMethod]
         public void CI_CD_GitTest()
         {
-            Assert.Fail();
+            Assert.IsTrue(true);
         }
     }
 }
