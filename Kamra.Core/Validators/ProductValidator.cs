@@ -57,6 +57,10 @@ namespace Kamra.Core.Validators
                 throw new ArgumentException(ValidationMessages.SearchTermCannotBeEmpty, nameof(searchTerm));
         }
 
-
+        public static void ValidateProductExists(Product product, List<Product> products)
+        {
+            if (!products.Contains(product))
+                throw new InvalidOperationException(ValidationMessages.ProductNotExists);
+        }
     }
 }

@@ -133,13 +133,16 @@
     <value>Product category cannot be null.</value>
   </data>
   <data name="CategoryNotExists" xml:space="preserve">
-    <value>Category not exists.</value>
+    <value>Category does not exists.</value>
   </data>
   <data name="ProductCannotBeNull" xml:space="preserve">
     <value>Product cannot be null.</value>
   </data>
   <data name="ProductNameCannotBeEmpty" xml:space="preserve">
     <value>Product name cannot be empty.</value>
+  </data>
+  <data name="ProductNotExists" xml:space="preserve">
+    <value>Product does not exists.</value>
   </data>
   <data name="SearchTermCannotBeEmpty" xml:space="preserve">
     <value>Search term cannot be empty</value>

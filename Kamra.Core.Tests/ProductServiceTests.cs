@@ -90,6 +90,14 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveProdct_NotExists_ShouldThrowInvalidOperationException()
+        {
+            var testProduct = testProducts[0];
+            productService.RemoveProduct(testProduct);
+        }
+
+        [TestMethod]
         public void GetAllProducts_ShouldReturnAllProducts()
         {
             productService.AddProduct(testProducts[0]);

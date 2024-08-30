@@ -16,7 +16,6 @@ namespace Kamra.Core.Services
         public void AddProduct(Product product)
         {
             ProductValidator.ValidateProductInput(product, _products);
-
             _products.Add(product);
         }        
 
@@ -27,6 +26,7 @@ namespace Kamra.Core.Services
 
         public void RemoveProduct(Product product)
         {
+            ProductValidator.ValidateProductExists(product, _products);
             _products.Remove(product);
         }
 

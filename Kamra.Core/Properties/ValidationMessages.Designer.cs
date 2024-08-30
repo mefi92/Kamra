@@ -133,6 +133,15 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product not exists..
+        /// </summary>
+        internal static string ProductNotExists {
+            get {
+                return ResourceManager.GetString("ProductNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search term cannot be empty.
         /// </summary>
         internal static string SearchTermCannotBeEmpty {
