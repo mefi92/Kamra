@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIPrototype", "UIPrototype\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter", "Starter\Starter.csproj", "{AC39474C-F20B-4B5D-AB83-D856160CD80A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karma.Persistence", "Karma.Persistence\Karma.Persistence.csproj", "{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AC39474C-F20B-4B5D-AB83-D856160CD80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC39474C-F20B-4B5D-AB83-D856160CD80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC39474C-F20B-4B5D-AB83-D856160CD80A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
