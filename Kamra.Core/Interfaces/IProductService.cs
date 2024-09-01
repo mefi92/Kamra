@@ -15,7 +15,5 @@ namespace Kamra.Core.Interfaces
         IEnumerable<Product> SearchProducts(string searchTerm);
         IEnumerable<Product> FilterProductsByExpirationDate(DateTime date);
         void AssignCategory(Product product, Category category);
-        public DateTime CreatingDate();
-        public DateTime LastModifiedDate();
     }
 }
