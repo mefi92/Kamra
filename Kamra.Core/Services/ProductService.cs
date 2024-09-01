@@ -46,7 +46,7 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.StoragePlace = storagePlace;
-                _productPersistence.Update(existingProduct);
+                _productPersistence.Update(existingProduct);                
             }
         }
 
@@ -81,6 +81,7 @@ namespace Kamra.Core.Services
             {
                 existingProduct.Category = category;
                 _productPersistence.Update(existingProduct);
+                product.UpdateLastModifiedDate();
             }
         }
 

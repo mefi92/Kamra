@@ -312,15 +312,35 @@ namespace Kamra.Core.Tests
         [TestMethod]
         public void ProductCreation_ShouldInitializeDatesWithinTolerance()
         {
+            TimeSpan tolerance = TimeSpan.FromMilliseconds(10);
+
             DateTime timeNow = DateTime.Now;
             productService.AddProduct(testProducts[0]);
             
-            var addedProduct = productService.GetProductByName("Milk");
-
-            TimeSpan tolerance = TimeSpan.FromMilliseconds(100);
+            var addedProduct = productService.GetProductByName("Milk");            
 
             Assert.IsTrue(Math.Abs((addedProduct.CreatingDate - timeNow).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The CreatingDate is not within the acceptable tolerance.");
             Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - timeNow).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
+        }
+
+        [TestMethod]
+        public void LastModifiedDate_ProductChanges_ShouldUpdateLastModifiedDate()
+        {
+            TimeSpan tolerance = TimeSpan.FromMilliseconds(10);
+
+            DateTime productCreatingDate = DateTime.Now;
+            productService.AddProduct(testProducts.First());
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Thread.Sleep(50);
+
+            DateTime modifiedDate = DateTime.Now;
+            productService.AssignCategory(addedProduct, foodCategory);
+
+            // CreatingDate stays the original.
+            Assert.IsTrue(Math.Abs((addedProduct.CreatingDate - productCreatingDate).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The CreatingDate is not within the acceptable tolerance.");
+            // LastModifiedDate should be updated.
+            Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - modifiedDate).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
         }
     }
 }
