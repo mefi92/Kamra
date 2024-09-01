@@ -76,17 +76,17 @@ namespace Kamra.Core.Services
 
         private void UpdateProductField(Product product, Action<Product> updateAction)
         {
-            var existingProduct = GetProductByName(product.Name);
-            if (existingProduct != null)
+            if (product != null)
             {
-                updateAction(existingProduct);
-                existingProduct.UpdateLastModifiedDate();
-                _productPersistence.Update(existingProduct);
+                updateAction(product);
+                product.UpdateLastModifiedDate();
+                _productPersistence.Update(product);
             }
         }
 
-        public void UpdateProductQuantity(string productName, int newQuantity)
+        public void UpdateProductQuantity(Product product, int newQuantity)
         {
+            // UpdateProductField(product, p => p.Quantity = newQuantity);
             throw new NotImplementedException();
         }
 
