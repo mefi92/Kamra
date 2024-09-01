@@ -84,5 +84,25 @@ namespace Kamra.Core.Services
                 _productPersistence.Update(existingProduct);
             }
         }
+
+        public void UpdateProductQuantity(string productName, int newQuantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetAvailableProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetOutOfStockProducts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
