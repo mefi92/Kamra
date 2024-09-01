@@ -15,5 +15,17 @@
         public List<Recipe> Recipes { get; set; }
         public DateTime CreatingDate { get; private set; }
         public DateTime LastModifiedDate { get; private set; }
+        
+        public Product() 
+        { 
+            CreatingDate = DateTime.Now;
+            LastModifiedDate = DateTime.Now;
+        }
+
+        public void UpdateLastModifiedDate()
+        {
+            LastModifiedDate = DateTime.Now;
+        }
+
     }
 }

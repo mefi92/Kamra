@@ -310,9 +310,17 @@ namespace Kamra.Core.Tests
         }
 
         [TestMethod]
-        public void CI_CD_GitTest()
+        public void ProductCreation_ShouldInitializeDatesWithinTolerance()
         {
-            Assert.IsTrue(true);
+            DateTime timeNow = DateTime.Now;
+            productService.AddProduct(testProducts[0]);
+            
+            var addedProduct = productService.GetProductByName("Milk");
+
+            TimeSpan tolerance = TimeSpan.FromMilliseconds(100);
+
+            Assert.IsTrue(Math.Abs((addedProduct.CreatingDate - timeNow).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The CreatingDate is not within the acceptable tolerance.");
+            Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - timeNow).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
         }
     }
 }
