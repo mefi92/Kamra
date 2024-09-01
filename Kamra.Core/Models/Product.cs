@@ -13,5 +13,7 @@
         public string PackagingType { get; set; }
         public string Barcode { get; set; }
         public List<Recipe> Recipes { get; set; }
+        public DateTime CreatingDate { get; private set; }
+        public DateTime LastModifiedDate { get; private set; }
     }
 }

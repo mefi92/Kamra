@@ -1,0 +1,88 @@
+Alapvető Szerkezet
+Adatbázis Struktúra:
+
+Termékek (Products):
+
+ID: Egyedi azonosító
+Név: Termék neve
+Kategória ID: Hivatkozás a kategóriára
+Helység ID: Hivatkozás a helységre
+Mennyiség: Aktuális darabszám
+Lejárati Dátum: Ha van
+Vonalkód: Egyedi vonalkód, ha van
+Létrehozás Dátuma: Mikor került a rendszerbe
+Utoljára Módosított Dátum: Utolsó frissítés ideje
+Kategóriák (Categories):
+
+ID: Egyedi azonosító
+Név: Kategória neve
+Leírás: Kategória leírása (opcionális)
+Helyiségek (Locations):
+
+ID: Egyedi azonosító
+Név: Helyiség neve (pl. konyha, pince, kamra)
+Leírás: Helyiség leírása (opcionális)
+Alapfunkciók:
+
+Termék hozzáadása: Termék felvitele az adatbázisba.
+Termék szerkesztése: Mennyiség módosítása, lejárati dátum frissítése, stb.
+Termékek törlése: Csak manuálisan törölhető, automatikusan nem.
+Kategóriák és helyiségek kezelése: Új kategóriák, helyiségek létrehozása, szerkesztése, törlése.
+Vonalkód olvasó támogatás: Termékek azonosítása vonalkód alapján.
+Logikai Tervezés és Új Funkciók
+Nulla Készlet Kezelése:
+
+Ha egy termék mennyisége nullára csökken, az adatbázisban marad, de a mennyiség 0 lesz. Így a termék később is nyomon követhető marad.
+Külön szűrő a "Kifogyott termékek" megtekintésére.
+Termék Létrehozás és Módosítás:
+
+Amikor új terméket hozol létre, ha már létezik hasonló névvel, akkor javaslatot tehet az alkalmazás, hogy azonosítsa a meglévő terméket.
+Automatikus figyelmeztetés, ha egy termék közel van a lejárati dátumhoz.
+Értesítési Rendszer:
+
+Figyelmeztető értesítések, ha egy termék lejár, vagy ha a készlet egy előre beállított küszöbértéket elér (pl. kevesebb mint 5 darab).
+Statikus Készlet Jelentés:
+
+Lehetőség van jelentések generálására, amelyek mutatják az aktuális készletet, a közelgő lejáratokat, és a kifogyott termékeket.
+Ezen kívül statisztikákat is készíthetsz: milyen termékeket használtál el a leggyorsabban, mely kategóriákban vannak a legnagyobb készletek, stb.
+Termék Előzmények Nyomon Követése:
+
+Minden termék esetében naplózható, hogy milyen változtatások történtek: mikor növekedett a készlet, mikor csökkent, mikor volt lejárati figyelmeztetés, stb.
+Felhasználói Jogosultságok:
+
+Ha több felhasználó kezeli az alkalmazást, különböző jogosultsági szinteket adhatsz meg (pl. admin, olvasó, szerkesztő), hogy ki mit módosíthat.
+Felhasználói Felület (UI) és Felhasználói Élmény (UX)
+Könnyen kezelhető felület:
+
+Könnyen hozzáférhető kategóriák, helyiségek és termékek.
+Gyors keresési lehetőség név vagy vonalkód alapján.
+Szűrők: például helyiség, kategória, lejárati dátum alapján.
+Dashboard és Gyors Áttekintés:
+
+Egy főoldal, ahol azonnal láthatók a legfontosabb információk: legközelebbi lejáratok, kifogyott termékek, stb.
+Mobil Támogatás:
+
+Ha asztali alkalmazásként indulsz, érdemes fontolóra venni egy mobilbarát verziót is, hiszen egy spájz kezelő alkalmazást gyakran lehetne használni mobileszközön.
+Jövőbeli Funkciók
+Szinkronizálás és Felhő Támogatás:
+
+Több eszköz közötti szinkronizáció felhőben, hogy bárhol elérhető legyen az adatbázis.
+Bevásárlólista Generálás:
+
+Automatikus bevásárlólista készítése a kifogyott termékekből vagy a szükséges alapanyagokból.
+API Készítés:
+
+Nyitott API létrehozása, hogy harmadik fél alkalmazásai is hozzáférjenek az adatokhoz (pl. bevásárló alkalmazások integrálása).
+
+-------
+Shopping List Generation: Automatically generate shopping lists based on out-of-stock items or recurring needs.
+Recipe Integration: If recipes are a part of the system, allow for dynamic product list adjustments based on recipes you plan to make, adjusting stock quantities accordingly.
+Barcode Scanning: If you haven’t already, fully integrate barcode scanning for easy product addition and inventory management.
+User Management and Roles: Introduce a user system with roles (admin, editor, viewer) to allow for multi-user access with appropriate permissions.
+
+3. Advanced Searching and Filtering
+Advanced Filtering: Extend SearchProducts to support more complex queries, such as filtering by multiple categories, locations, or ranges of expiration dates.
+Sort and Pagination: Add support for sorting products (e.g., by name, expiration date, quantity) and paginating results to handle large product lists more efficiently.
+4. Category and Storage Management
+Hierarchical Categories: If applicable, extend the category structure to support subcategories. This can help in organizing products more effectively.
+Storage Place Enhancements: Add more detailed management of storage places, such as categorizing storage places (e.g., by temperature control) or tracking capacity usage.

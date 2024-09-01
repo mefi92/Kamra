@@ -13,7 +13,6 @@ namespace Kamra.Core.Tests
     [TestClass]
     public class ProductServiceTests
     {
-        private ICategoryService categoryService;
         private IProductService productService;
 
         private List<Product> testProducts;
@@ -25,7 +24,6 @@ namespace Kamra.Core.Tests
         public void Init()
         {
             productService = new ProductService();
-            categoryService = new CategoryService();
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             drinkCategory = new Category { Id = 1, Name = "Drink" };
