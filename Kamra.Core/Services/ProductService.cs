@@ -1,11 +1,6 @@
 ﻿using Kamra.Core.Interfaces;
 using Kamra.Core.Models;
 using Kamra.Core.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kamra.Core.Services
 {
@@ -46,7 +41,7 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.StoragePlace = storagePlace;
-                _productPersistence.Update(existingProduct);                
+                UpdateProductAndModificationDate(product, existingProduct);
             }
         }
 
@@ -58,7 +53,17 @@ namespace Kamra.Core.Services
                 existingProduct.DateOfOpening = dateOfOpening;
                 UpdateProductAndModificationDate(product, existingProduct);
             }
-        }        
+        }
+
+        public void AssignCategory(Product product, Category category)
+        {
+            var existingProduct = GetProductByName(product.Name);
+            if (existingProduct != null)
+            {
+                existingProduct.Category = category;
+                UpdateProductAndModificationDate(product, existingProduct);
+            }
+        }
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
@@ -72,17 +77,7 @@ namespace Kamra.Core.Services
             ProductValidator.ValidateBarcode(barcode);
 
             return _productPersistence.GetAll().FirstOrDefault(p => p.Barcode == barcode);
-        }
-
-        public void AssignCategory(Product product, Category category)
-        {
-            var existingProduct = GetProductByName(product.Name);
-            if (existingProduct != null)
-            {
-                existingProduct.Category = category;
-                UpdateProductAndModificationDate(product, existingProduct);
-            }
-        }        
+        }                
 
         public IEnumerable<Product> SearchProducts(string searchTerm)
         {

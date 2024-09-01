@@ -358,5 +358,22 @@ namespace Kamra.Core.Tests
 
             Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - modifiedDate).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
         }
+
+        [TestMethod]
+        public void LastModifiedDate_AssignStoragePlaceAssignment_ShouldUpdateLastModifiedDate()
+        {
+            TimeSpan tolerance = TimeSpan.FromMilliseconds(2);
+            StoragePlace kitchen = new StoragePlace { Id = 1, Name = "Kitchen" };
+
+            productService.AddProduct(testProducts.First());
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Thread.Sleep(1);
+
+            DateTime modifiedDate = DateTime.Now;
+            productService.AssignStoragePlace(addedProduct, kitchen);
+
+            Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - modifiedDate).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
+        }
     }
 }
