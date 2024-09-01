@@ -1,5 +1,6 @@
 ﻿using Kamra.Core.Models;
 using Kamra.Core.Services;
+using Karma.Persistence;
 using System;
 
 namespace Kamra.UI.ConsoleApp
@@ -8,7 +9,8 @@ namespace Kamra.UI.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var productService = new ProductService();
+            var productPersistance = new InMemoryPersistence<Product>();
+            var productService = new ProductService(productPersistance);
             var categoryService = new CategoryService();
 
             while (true)

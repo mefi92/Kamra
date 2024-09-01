@@ -11,28 +11,33 @@ namespace Kamra.Core.Services
 {
     public class ProductService : IProductService
     {        
-        private List<Product> _products = new List<Product>();
+        IPersistence<Product> _productPersistence;
+
+        public ProductService(IPersistence<Product> productPersistence) 
+        {
+            _productPersistence = productPersistence;
+        }
 
         public void AddProduct(Product product)
         {
-            ProductValidator.ValidateProductInput(product, _products);
-            _products.Add(product);
+            ProductValidator.ValidateProductInput(product, _productPersistence.GetAll().ToList());
+            _productPersistence.Add(product);
         }        
 
         public Product GetProductByName(string name)
         {
-            return _products.FirstOrDefault(p => p.Name == name);
+            return _productPersistence.GetByName(name);
         }
 
         public void RemoveProduct(Product product)
         {
-            ProductValidator.ValidateProductExists(product, _products);
-            _products.Remove(product);
+            ProductValidator.ValidateProductExists(product, _productPersistence.GetAll().ToList());
+            _productPersistence.Remove(product);
         }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _products.AsReadOnly();
+            return _productPersistence.GetAll();
         }
 
         public void AssignStoragePlace(Product product, StoragePlace storagePlace)
@@ -41,6 +46,7 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.StoragePlace = storagePlace;
+                _productPersistence.Update(existingProduct);
             }
         }
 
@@ -50,6 +56,7 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.DateOfOpening = dateOfOpening;
+                _productPersistence.Update(existingProduct);
             }
         }        
 
@@ -57,14 +64,14 @@ namespace Kamra.Core.Services
         {
             CategoryValidator.ValidateCategoryName(categoryName);
 
-            return _products.Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
+            return _productPersistence.GetAll().Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
         }
 
         public Product GetProductByBarcode(string barcode)
         {
             ProductValidator.ValidateBarcode(barcode);
 
-            return _products.FirstOrDefault(p => p.Barcode == barcode);
+            return _productPersistence.GetAll().FirstOrDefault(p => p.Barcode == barcode);
         }
 
         public void AssignCategory(Product product, Category category)
@@ -73,20 +80,20 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.Category = category;
+                _productPersistence.Update(existingProduct);
             }
         }
 
         public IEnumerable<Product> SearchProducts(string searchTerm)
         {
-            ProductValidator.ValidateSearchTerm(searchTerm);
-
-            return _products.Where(p => p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                        p.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+            return _productPersistence.GetAll().Where(p =>
+                p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                p.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
         {
-            return _products.Where(p => p.ExpirationDate <= date);
+            return _productPersistence.GetAll().Where(p => p.ExpirationDate <= date);
         }
     }
 }

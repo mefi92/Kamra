@@ -7,18 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Kamra.Core.Interfaces;
+using Karma.Persistence;
 
 namespace Kamra.Core.Tests
 {
     public class ProductServicePerformanceTests
     {
+        private IPersistence<Product> productPersistence;
         private ProductService productService;
         private List<Product> products;
 
         [GlobalSetup]
         public void Setup()
         {
-            productService = new ProductService();
+            productPersistence = new InMemoryPersistence<Product>();
+            productService = new ProductService(productPersistence);
             products = new List<Product>();
 
             var category = new Category { Id = 1, Name = "Food" };

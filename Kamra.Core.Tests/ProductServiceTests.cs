@@ -7,23 +7,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Kamra.Core.Services;
 using Moq;
+using Karma.Persistence;
 
 namespace Kamra.Core.Tests
 {
     [TestClass]
     public class ProductServiceTests
     {
-        private IProductService productService;
+        private IPersistence<Product> productPersistence;
+        private IProductService productService;        
 
         private List<Product> testProducts;
         
         private Category foodCategory;
         private Category drinkCategory;
 
+
+
         [TestInitialize]
         public void Init()
         {
-            productService = new ProductService();
+            productPersistence = new InMemoryPersistence<Product>();
+            productService = new ProductService(productPersistence);
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             drinkCategory = new Category { Id = 1, Name = "Drink" };

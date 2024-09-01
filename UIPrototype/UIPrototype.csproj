@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kamra.Core\Kamra.Core.csproj" />
+    <ProjectReference Include="..\Karma.Persistence\Karma.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
