@@ -56,7 +56,7 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.DateOfOpening = dateOfOpening;
-                _productPersistence.Update(existingProduct);
+                UpdateProductAndModificationDate(product, existingProduct);
             }
         }        
 
@@ -80,10 +80,9 @@ namespace Kamra.Core.Services
             if (existingProduct != null)
             {
                 existingProduct.Category = category;
-                _productPersistence.Update(existingProduct);
-                product.UpdateLastModifiedDate();
+                UpdateProductAndModificationDate(product, existingProduct);
             }
-        }
+        }        
 
         public IEnumerable<Product> SearchProducts(string searchTerm)
         {
@@ -95,6 +94,12 @@ namespace Kamra.Core.Services
         public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
         {
             return _productPersistence.GetAll().Where(p => p.ExpirationDate <= date);
+        }
+
+        private void UpdateProductAndModificationDate(Product newProduct, Product oldProduct)
+        {
+            _productPersistence.Update(oldProduct);
+            newProduct.UpdateLastModifiedDate();
         }
     }
 }
