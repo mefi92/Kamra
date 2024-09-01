@@ -1,5 +1,6 @@
 ﻿using Kamra.Core.Interfaces;
-using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Karma.Persistence
 {
@@ -14,13 +15,13 @@ namespace Karma.Persistence
 
         public T GetByName(string name)
         {
-            return _entities.FirstOrDefault(e => e.GetType().GetProperty("Name").GetValue(e, null).ToString() == name);
+            return _entities.FirstOrDefault(e => GetEntityName(e) == name);
         }
 
         public IEnumerable<T> GetAll()
         {
             return _entities.AsReadOnly();
-        }        
+        }
 
         public void Remove(T entity)
         {
@@ -29,12 +30,17 @@ namespace Karma.Persistence
 
         public void Update(T entity)
         {
-            var existingEntity = GetByName(entity.GetType().GetProperty("Name").GetValue(entity, null).ToString());
+            var existingEntity = GetByName(GetEntityName(entity));
             if (existingEntity != null)
             {
-                _entities.Remove(existingEntity);
-                _entities.Add(entity);
+                int index = _entities.IndexOf(existingEntity);
+                _entities[index] = entity;
             }
+        }
+
+        private string GetEntityName(T entity)
+        {
+            return entity.GetType().GetProperty("Name")?.GetValue(entity, null)?.ToString();
         }
     }
 }
