@@ -10,8 +10,9 @@ namespace Kamra.UI.ConsoleApp
         static void Main(string[] args)
         {
             var productPersistance = new InMemoryPersistence<Product>();
+            var categoryPersistance = new InMemoryPersistence<Category>();
             var productService = new ProductService(productPersistance);
-            var categoryService = new CategoryService();
+            var categoryService = new CategoryService(categoryPersistance);
 
             while (true)
             {

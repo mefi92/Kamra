@@ -2,6 +2,7 @@
 using Kamra.Core.Models;
 using Kamra.Core.Services;
 using Kamra.Core.Validators;
+using Karma.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Kamra.Core.Tests
     [TestClass]
     public class CategoryServiceTests
     {
+        private IPersistence<Category> _categoryPersistence;
         private ICategoryService categoryService;
 
         private Category foodCategory;
@@ -21,7 +23,8 @@ namespace Kamra.Core.Tests
         [TestInitialize]
         public void Init()
         {
-            categoryService = new CategoryService();
+            _categoryPersistence = new InMemoryPersistence<Category>();
+            categoryService = new CategoryService(_categoryPersistence);
 
             foodCategory = new Category { Id = 1, Name = "Food" };
             drinkCategory = new Category { Id = 2, Name = "Drink" };

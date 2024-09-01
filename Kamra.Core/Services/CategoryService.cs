@@ -11,28 +11,33 @@ namespace Kamra.Core.Services
 {
     public class CategoryService : ICategoryService
     {
-        private List<Category> _categories = new List<Category>();
+        IPersistence<Category> _categoryPersistence;
+
+        public CategoryService(IPersistence<Category> categoryPersistence) 
+        {
+            _categoryPersistence = categoryPersistence;
+        }
 
         public void AddCategory(Category category)
         {
-            CategoryValidator.ValidateCategoryInput(category, _categories);
-            _categories.Add(category);
+            CategoryValidator.ValidateCategoryInput(category, _categoryPersistence.GetAll().ToList());
+            _categoryPersistence.Add(category);
         }
 
         public IEnumerable<Category> GetAllCategories()
         {
-            return _categories.AsReadOnly();
+            return _categoryPersistence.GetAll();
         }
 
         public Category GetCategoryByName(string categoryName)
         {
-            return _categories.FirstOrDefault(p => p.Name == categoryName);
+            return _categoryPersistence.GetByName(categoryName);
         }
 
         public void RemoveCategory(Category category)
         {
-            CategoryValidator.ValidateCategoryExists(category, _categories);
-            _categories.Remove(category);
+            CategoryValidator.ValidateCategoryExists(category, _categoryPersistence.GetAll().ToList());
+            _categoryPersistence.Remove(category);
         }
     }
 }
