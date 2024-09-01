@@ -5,19 +5,19 @@ using Kamra.Core.Validators;
 namespace Kamra.Core.Services
 {
     public class ProductService : IProductService
-    {        
-        IPersistence<Product> _productPersistence;
+    {
+        private readonly IPersistence<Product> _productPersistence;
 
-        public ProductService(IPersistence<Product> productPersistence) 
+        public ProductService(IPersistence<Product> productPersistence)
         {
             _productPersistence = productPersistence;
         }
 
         public void AddProduct(Product product)
         {
-            ProductValidator.ValidateProductInput(product, _productPersistence.GetAll().ToList());
+            ProductValidator.ValidateProductInput(product, GetAllProducts().ToList());
             _productPersistence.Add(product);
-        }        
+        }
 
         public Product GetProductByName(string name)
         {
@@ -26,7 +26,7 @@ namespace Kamra.Core.Services
 
         public void RemoveProduct(Product product)
         {
-            ProductValidator.ValidateProductExists(product, _productPersistence.GetAll().ToList());
+            ProductValidator.ValidateProductExists(product, GetAllProducts().ToList());
             _productPersistence.Remove(product);
         }
 
@@ -37,64 +37,52 @@ namespace Kamra.Core.Services
 
         public void AssignStoragePlace(Product product, StoragePlace storagePlace)
         {
-            var existingProduct = GetProductByName(product.Name);
-            if (existingProduct != null)
-            {
-                existingProduct.StoragePlace = storagePlace;
-                UpdateProductAndModificationDate(product, existingProduct);
-            }
+            UpdateProductField(product, p => p.StoragePlace = storagePlace);
         }
 
         public void TrackOpeningDate(Product product, DateTime dateOfOpening)
         {
-            var existingProduct = GetProductByName(product.Name);
-            if (existingProduct != null)
-            {
-                existingProduct.DateOfOpening = dateOfOpening;
-                UpdateProductAndModificationDate(product, existingProduct);
-            }
+            UpdateProductField(product, p => p.DateOfOpening = dateOfOpening);
         }
 
         public void AssignCategory(Product product, Category category)
         {
-            var existingProduct = GetProductByName(product.Name);
-            if (existingProduct != null)
-            {
-                existingProduct.Category = category;
-                UpdateProductAndModificationDate(product, existingProduct);
-            }
+            UpdateProductField(product, p => p.Category = category);
         }
 
         public IEnumerable<Product> GetProductsByCategory(string categoryName)
         {
             CategoryValidator.ValidateCategoryName(categoryName);
-
-            return _productPersistence.GetAll().Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
+            return GetAllProducts().Where(p => p.Category.Name == categoryName).ToList().AsReadOnly();
         }
 
         public Product GetProductByBarcode(string barcode)
         {
             ProductValidator.ValidateBarcode(barcode);
-
-            return _productPersistence.GetAll().FirstOrDefault(p => p.Barcode == barcode);
-        }                
+            return GetAllProducts().FirstOrDefault(p => p.Barcode == barcode);
+        }
 
         public IEnumerable<Product> SearchProducts(string searchTerm)
         {
-            return _productPersistence.GetAll().Where(p =>
+            return GetAllProducts().Where(p =>
                 p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 p.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
         {
-            return _productPersistence.GetAll().Where(p => p.ExpirationDate <= date);
+            return GetAllProducts().Where(p => p.ExpirationDate <= date);
         }
 
-        private void UpdateProductAndModificationDate(Product newProduct, Product oldProduct)
+        private void UpdateProductField(Product product, Action<Product> updateAction)
         {
-            _productPersistence.Update(oldProduct);
-            newProduct.UpdateLastModifiedDate();
+            var existingProduct = GetProductByName(product.Name);
+            if (existingProduct != null)
+            {
+                updateAction(existingProduct);
+                existingProduct.UpdateLastModifiedDate();
+                _productPersistence.Update(existingProduct);
+            }
         }
     }
 }
