@@ -1,11 +1,6 @@
 ﻿using Kamra.Core.Interfaces;
 using Kamra.Core.Models;
 using Kamra.Core.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kamra.Core.Services
 {
