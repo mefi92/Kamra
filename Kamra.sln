@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamra.Core", "Kamra.Core\Kamra.Core.csproj", "{7C72C622-46EB-41D2-B349-69210997F468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kamra.Core", "Kamra.Core\Kamra.Core.csproj", "{7C72C622-46EB-41D2-B349-69210997F468}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamra.Core.Tests", "Kamra.Core.Tests\Kamra.Core.Tests.csproj", "{0F9E32D7-95F2-4FA8-94F0-C720CD767B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kamra.Core.Tests", "Kamra.Core.Tests\Kamra.Core.Tests.csproj", "{0F9E32D7-95F2-4FA8-94F0-C720CD767B5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTests", "PerformanceTests\PerformanceTests.csproj", "{80134D56-567D-4300-A41F-8B2D4BCA2EF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceTests", "PerformanceTests\PerformanceTests.csproj", "{80134D56-567D-4300-A41F-8B2D4BCA2EF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIPrototype", "UIPrototype\UIPrototype.csproj", "{69A2C568-F625-4DC3-AF8C-FEA478D7F3D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIPrototype", "UIPrototype\UIPrototype.csproj", "{69A2C568-F625-4DC3-AF8C-FEA478D7F3D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter", "Starter\Starter.csproj", "{AC39474C-F20B-4B5D-AB83-D856160CD80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starter", "Starter\Starter.csproj", "{AC39474C-F20B-4B5D-AB83-D856160CD80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karma.Persistence", "Karma.Persistence\Karma.Persistence.csproj", "{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karma.Persistence", "Karma.Persistence\Karma.Persistence.csproj", "{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamra.App", "Kamra.App\Kamra.App.csproj", "{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,12 @@ Global
 		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D1594AE-B573-4A4E-AB18-B4C9B9CC2738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF5D5D2-170B-4797-BEC9-4956DFA8B535}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
