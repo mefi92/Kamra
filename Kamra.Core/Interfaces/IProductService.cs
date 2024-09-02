@@ -19,6 +19,8 @@ namespace Kamra.Core.Interfaces
         IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7);
         IEnumerable<Product> GetAvailableProducts();
         IEnumerable<Product> GetOutOfStockProducts();
+        void IncreaseProductQuantity(Product product, int amount);
+        void DecreaseProductQuantity(Product product, int amount);
 
     }
 }

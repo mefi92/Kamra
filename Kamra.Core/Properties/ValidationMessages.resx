@@ -144,6 +144,12 @@
   <data name="ProductNotExists" xml:space="preserve">
     <value>Product does not exists.</value>
   </data>
+  <data name="ProductQuantityAmountCannotBeNegative" xml:space="preserve">
+    <value>Amount cannot be negative.</value>
+  </data>
+  <data name="ProductQuantityCannotGoBelowZero" xml:space="preserve">
+    <value>Cannot decrease quantity below zero.</value>
+  </data>
   <data name="SearchTermCannotBeEmpty" xml:space="preserve">
     <value>Search term cannot be empty</value>
   </data>

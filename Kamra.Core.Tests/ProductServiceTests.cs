@@ -389,6 +389,69 @@ namespace Kamra.Core.Tests
 
             Assert.AreEqual(10, addedProduct.Quantity);
         }
-         
+
+        [TestMethod]
+        public void IncreaseProductQuantity_ShouldUpdateAndIncreaseProductQuantity()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.AreEqual(5, addedProduct.Quantity);
+
+            productService.IncreaseProductQuantity(addedProduct, 3);
+
+            Assert.AreEqual(8, addedProduct.Quantity);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void IncreaseProductQuantity_WithNegativeInt_ShouldThrowInvalidOperationException()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            productService.IncreaseProductQuantity(addedProduct, -3);
+        }
+
+
+        [TestMethod]
+        public void DecreaseProductQuantity_ShouldUpdateAndDecreaseProductQuantity()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.AreEqual(5, addedProduct.Quantity);
+
+            productService.DecreaseProductQuantity(addedProduct, 3);
+
+            Assert.AreEqual(2, addedProduct.Quantity);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DecreaseProductQuantity_UseMoreThenAvailable_ShouldThrowInvalidOperationException()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.AreEqual(5, addedProduct.Quantity);
+
+            productService.DecreaseProductQuantity(addedProduct, 10);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DecreaseProductQuantity_WithNegativeInt_ShouldThrowInvalidOperationException()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            productService.DecreaseProductQuantity(addedProduct, -3);
+        }
     }
 }

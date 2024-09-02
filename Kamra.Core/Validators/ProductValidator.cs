@@ -62,5 +62,23 @@ namespace Kamra.Core.Validators
             if (!products.Contains(product))
                 throw new InvalidOperationException(ValidationMessages.ProductNotExists);
         }
+
+        public static void ValidateQuantityAmount(Product product, int amount)
+        {
+            ValidateQuantityModifierNegative(amount);
+            ValidateQuantityDecreaseBelowZero(product, amount);
+        }
+
+        private static void ValidateQuantityModifierNegative(int amount)
+        {
+            if (amount < 0)
+                throw new InvalidOperationException(ValidationMessages.ProductQuantityAmountCannotBeNegative);
+        }
+
+        private static void ValidateQuantityDecreaseBelowZero(Product product, int amount)
+        {
+            if (product.Quantity - amount < 0)
+                throw new InvalidOperationException(ValidationMessages.ProductQuantityCannotGoBelowZero);
+        }
     }
 }

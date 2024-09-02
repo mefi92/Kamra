@@ -142,6 +142,24 @@ namespace Kamra.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount cannot be negative..
+        /// </summary>
+        internal static string ProductQuantityAmountCannotBeNegative {
+            get {
+                return ResourceManager.GetString("ProductQuantityAmountCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot decrease quantity below zero..
+        /// </summary>
+        internal static string ProductQuantityCannotGoBelowZero {
+            get {
+                return ResourceManager.GetString("ProductQuantityCannotGoBelowZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search term cannot be empty.
         /// </summary>
         internal static string SearchTermCannotBeEmpty {

@@ -72,21 +72,25 @@ namespace Kamra.Core.Services
         public IEnumerable<Product> FilterProductsByExpirationDate(DateTime date)
         {
             return GetAllProducts().Where(p => p.ExpirationDate <= date);
-        }
-
-        private void UpdateProductField(Product product, Action<Product> updateAction)
-        {
-            if (product != null)
-            {
-                updateAction(product);
-                product.UpdateLastModifiedDate();
-                _productPersistence.Update(product);
-            }
-        }
+        }        
 
         public void UpdateProductQuantity(Product product, int newQuantity)
         {
             UpdateProductField(product, p => p.Quantity = newQuantity);
+        }
+
+        public void IncreaseProductQuantity(Product product, int amount) 
+        {
+            ProductValidator.ValidateQuantityAmount(product, amount);   
+
+            UpdateProductField(product, p => p.Quantity += amount);            
+        }
+
+        public void DecreaseProductQuantity(Product product, int amount)
+        {
+            ProductValidator.ValidateQuantityAmount(product, amount);
+
+            UpdateProductField(product, p => p.Quantity -= amount);
         }
 
         public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)
@@ -102,6 +106,16 @@ namespace Kamra.Core.Services
         public IEnumerable<Product> GetOutOfStockProducts()
         {
             throw new NotImplementedException();
+        }
+
+        private void UpdateProductField(Product product, Action<Product> updateAction)
+        {
+            if (product != null)
+            {
+                updateAction(product);
+                product.UpdateLastModifiedDate();
+                _productPersistence.Update(product);
+            }
         }
     }
 }
