@@ -93,6 +93,11 @@ namespace Kamra.Core.Services
             UpdateProductField(product, p => p.Quantity -= amount);
         }
 
+        public void MarkAsFavorite(Product product, bool isFavorite)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)
         {
             throw new NotImplementedException();

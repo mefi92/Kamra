@@ -453,5 +453,15 @@ namespace Kamra.Core.Tests
 
             productService.DecreaseProductQuantity(addedProduct, -3);
         }
+
+        [TestMethod]
+        public void ProductIsFavorite_DefaultState_ShouldBeFalse()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.IsFalse(addedProduct.isFavorite);
+        }
     }
 }
