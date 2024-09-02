@@ -486,5 +486,38 @@ namespace Kamra.Core.Tests
 
             Assert.IsFalse(addedProduct.IsFavorite);
         }
+
+        [TestMethod]
+        public void ProductIsArchived_DefaultState_ShouldBeFalse()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.IsFalse(addedProduct.IsArchived);
+        }
+
+        [TestMethod]
+        public void ProductIsArchived_ArchiveProduct_ShouldBeTrue()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+            productService.ArchiveProduct(addedProduct, true);
+
+            Assert.IsTrue(addedProduct.IsArchived);
+        }
+
+        [TestMethod]
+        public void ProductIsArchived_ArchiveProductThenUnarchive_ShouldBeFalse()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+            productService.ArchiveProduct(addedProduct, true);
+            productService.ArchiveProduct(addedProduct, false);
+
+            Assert.IsFalse(addedProduct.IsArchived);
+        }
     }
 }

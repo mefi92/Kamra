@@ -98,6 +98,12 @@ namespace Kamra.Core.Services
             UpdateProductField(product, p => p.IsFavorite = isFavorite);
         }
 
+        public void ArchiveProduct(Product product, bool isArchived)
+        {
+            UpdateProductField(product, p => p.IsArchived = isArchived);
+        }
+
+
         public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)
         {
             throw new NotImplementedException();

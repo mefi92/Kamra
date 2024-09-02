@@ -12,6 +12,7 @@ namespace Kamra.Core.Interfaces
         void AssignStoragePlace(Product product, StoragePlace storagePlace);
         void TrackOpeningDate(Product product, DateTime dateOfOpening);
         void MarkAsFavorite(Product product, bool isFavorite);
+        void ArchiveProduct(Product product, bool isArchived);
         Product GetProductByBarcode(string barcode);
         IEnumerable<Product> SearchProducts(string searchTerm);
         IEnumerable<Product> FilterProductsByExpirationDate(DateTime date);
