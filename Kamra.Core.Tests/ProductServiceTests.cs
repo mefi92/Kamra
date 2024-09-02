@@ -375,5 +375,20 @@ namespace Kamra.Core.Tests
 
             Assert.IsTrue(Math.Abs((addedProduct.LastModifiedDate - modifiedDate).TotalMilliseconds) <= tolerance.TotalMilliseconds, "The LastModifiedDate is not within the acceptable tolerance.");
         }
+
+        [TestMethod]
+        public void UpdateProductQuantity_ShouldUpdateProductQuantity()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+
+            Assert.AreEqual(5, addedProduct.Quantity);
+
+            productService.UpdateProductQuantity(addedProduct, 10);
+
+            Assert.AreEqual(10, addedProduct.Quantity);
+        }
+         
     }
 }

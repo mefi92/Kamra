@@ -86,8 +86,7 @@ namespace Kamra.Core.Services
 
         public void UpdateProductQuantity(Product product, int newQuantity)
         {
-            // UpdateProductField(product, p => p.Quantity = newQuantity);
-            throw new NotImplementedException();
+            UpdateProductField(product, p => p.Quantity = newQuantity);
         }
 
         public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)
