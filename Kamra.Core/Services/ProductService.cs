@@ -95,7 +95,7 @@ namespace Kamra.Core.Services
 
         public void MarkAsFavorite(Product product, bool isFavorite)
         {
-            throw new NotImplementedException();
+            UpdateProductField(product, p => p.IsFavorite = isFavorite);
         }
 
         public IEnumerable<Product> GetExpiringSoonProducts(int daysBeforeExpiration = 7)

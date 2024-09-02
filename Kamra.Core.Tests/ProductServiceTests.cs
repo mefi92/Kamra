@@ -461,7 +461,30 @@ namespace Kamra.Core.Tests
 
             var addedProduct = productService.GetProductByName("Milk");
 
-            Assert.IsFalse(addedProduct.isFavorite);
+            Assert.IsFalse(addedProduct.IsFavorite);
+        }
+
+        [TestMethod]
+        public void ProductIsFavorite_MarkAsFavorite_ShouldBeTrue()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+            productService.MarkAsFavorite(addedProduct, true);
+
+            Assert.IsTrue(addedProduct.IsFavorite);
+        }
+
+        [TestMethod]
+        public void ProductIsFavorite_MarkAsFavoriteThenUnmark_ShouldBeFalse()
+        {
+            productService.AddProduct(testProducts.First());
+
+            var addedProduct = productService.GetProductByName("Milk");
+            productService.MarkAsFavorite(addedProduct, true);
+            productService.MarkAsFavorite(addedProduct, false);
+
+            Assert.IsFalse(addedProduct.IsFavorite);
         }
     }
 }

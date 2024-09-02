@@ -12,7 +12,7 @@
         public DateTime? DateOfOpening { get; set; }
         public string PackagingType { get; set; }
         public string Barcode { get; set; }
-        public bool isFavorite { get; set; }
+        public bool IsFavorite { get; set; }
         public List<Recipe> Recipes { get; set; }
         public DateTime CreatingDate { get; private set; }
         public DateTime LastModifiedDate { get; private set; }
